@@ -9,7 +9,6 @@ namespace Domain.Services.QRCodes
 {
     public interface IQRGenerate
     {
-        string OutPutFilePath { get; }
         void Generate(string qrCodeName, string strData);
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Models.Users;
 
+
 namespace Domain.Models.QRCodes
 {
     public class QRCode
