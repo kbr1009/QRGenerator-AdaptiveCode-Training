@@ -11,7 +11,7 @@ namespace Infrastructure.InMemoryDatabase.Users
     public class UserRepository : IUserRepository
     {
         public UserRepository() { }
-        public void CreateUser(User user) 
+        public void Save(User user) 
             => Console.WriteLine($"ID: {user.Id.Value} - {user.UserName.Value}を生成しました。");
     }
 }
