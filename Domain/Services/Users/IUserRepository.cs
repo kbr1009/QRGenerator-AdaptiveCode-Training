@@ -9,6 +9,6 @@ namespace Domain.Services.Users
 {
     public interface IUserRepository
     {
-        void Create(User user);
+        void CreateUser(User user);
     }
 }

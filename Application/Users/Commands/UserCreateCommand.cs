@@ -32,9 +32,9 @@ namespace Application.Users.Commands
                     lastName: new LastName(createUserModel.LastName),
                     gender: (Gender)createUserModel.Gender);
 
-                QRCode qRCode = QRCode.QRCodeDataCreate(user);
+                QRCode qRCode = QRCode.CreateQRCodeData(user);
                 _qRCodeCreatecommand.Execute(qRCode);
-                _repository.Create(user);
+                _repository.CreateUser(user);
             }
             catch
             {

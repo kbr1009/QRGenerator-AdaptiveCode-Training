@@ -31,7 +31,7 @@ namespace Domain.Models.QRCodes
                 throw new ArgumentNullException("error!: ユーザ情報がないとQRコードが作成できません。");
         }
 
-        public static QRCode QRCodeDataCreate(User user)
+        public static QRCode CreateQRCodeData(User user)
         {
             return new QRCode(user);
         }
