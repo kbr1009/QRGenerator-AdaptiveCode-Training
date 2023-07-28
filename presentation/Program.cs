@@ -19,17 +19,31 @@ using var provider = services.BuildServiceProvider();
 
 // 機能ごとにテストがかけるの最高杉
 // 部品の組み立て
-IQRGenerate qRGenerater = provider.GetService<IQRGenerate>();
-IQRCodeCreateCommand qrCodeCreate = new QRCodeCreateCommand(qRGenerater);
-//-ユーザ情報・QRコードの作成テストコード
-User user = User.CreateNewUser(new FirstName("怜雄"), new LastName("小林"), Gender.男性);
-QRCode qRCode = new QRCode(user);
-qrCodeCreate.Execute(qRCode);
+//IQRGenerate qRGenerater = provider.GetService<IQRGenerate>();
+//IQRCodeCreateCommand qrCodeCreate = new QRCodeCreateCommand(qRGenerater);
+////-ユーザ情報・QRコードの作成テストコード
+//User user = User.CreateNewUser(new FirstName("怜雄"), new LastName("小林"), (Gender)0);
+//QRCode qRCode = new QRCode(user);
+//qrCodeCreate.Execute(qRCode);
 
 // ユーザを新たに生成するテスト
 IUserCreateCommand createUerCmd = provider.GetService<IUserCreateCommand>();
 CreateUserModel createUserModel = new CreateUserModel();
 createUserModel.FirstName = "怜雄";
 createUserModel.LastName = "小林";
+createUserModel.EmailAddress = "reo109r@icloud.com";
 createUserModel.Gender = (int)Gender.男性;
 createUerCmd.Execute(createUserModel);
+
+EmailAddress emailAddress = new EmailAddress("reo109r@icloud.com");
+Console.WriteLine($"E-mail:{emailAddress.Value}");
+Console.WriteLine($"プリンシパル名：{emailAddress.GetPrincipal()}");
+Console.WriteLine($"ドメイン名：{emailAddress.GetDomain()}");
+
+EmailAddress emailAddressByForm = EmailAddress.FromPartsCreate("reo","google.com");
+Console.WriteLine($"E-mail:{emailAddressByForm.Value}");
+Console.WriteLine($"プリンシパル名：{emailAddressByForm.GetPrincipal()}");
+Console.WriteLine($"ドメイン名：{emailAddressByForm.GetDomain()}");
+
+// Emailアドレスのバリューオブジェクト参考
+// https://github.com/draphyz/DDD/blob/entityframework/Src/DDD.Common/Domain/EmailAddress.cs

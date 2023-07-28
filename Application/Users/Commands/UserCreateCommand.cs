@@ -32,6 +32,7 @@ namespace Application.Users.Commands
                 User user = User.CreateNewUser(
                     firstName: new FirstName(createUserModel.FirstName),
                     lastName: new LastName(createUserModel.LastName),
+                    emailAddress: new EmailAddress(createUserModel.EmailAddress),
                     gender: (Gender)createUserModel.Gender);
 
                 // ユーザ作成時のQRコード生成
