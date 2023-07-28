@@ -7,6 +7,7 @@ using Domain.Models.QRCodes;
 using Application.QRCodes.Commands;
 using Domain.Services.Users;
 using Infrastructure.InMemoryDatabase.Users;
+using Infrastructure.InMemoryDatabase;
 using Application.Users.Commands;
 
 // ♡ラブ注入♡ ＊DI
@@ -15,6 +16,7 @@ services.AddTransient<IQRGenerate, QRGenerate>();
 services.AddTransient<IUserRepository, UserRepository>();
 services.AddTransient<IQRCodeCreateCommand, QRCodeCreateCommand>();
 services.AddTransient<IUserCreateCommand, UserCreateCommand>();
+services.AddTransient<Infrastructure.InMemoryDatabase.AppContext>();
 using var provider = services.BuildServiceProvider();
 
 // 機能ごとにテストがかけるの最高杉
@@ -35,15 +37,15 @@ createUserModel.EmailAddress = "reo109r@icloud.com";
 createUserModel.Gender = (int)Gender.男性;
 createUerCmd.Execute(createUserModel);
 
-EmailAddress emailAddress = new EmailAddress("reo109r@icloud.com");
-Console.WriteLine($"E-mail:{emailAddress.Value}");
-Console.WriteLine($"プリンシパル名：{emailAddress.GetPrincipal()}");
-Console.WriteLine($"ドメイン名：{emailAddress.GetDomain()}");
+//EmailAddress emailAddress = new EmailAddress("reo109r@icloud.com");
+//Console.WriteLine($"E-mail:{emailAddress.Value}");
+//Console.WriteLine($"プリンシパル名：{emailAddress.GetPrincipal()}");
+//Console.WriteLine($"ドメイン名：{emailAddress.GetDomain()}");
 
-EmailAddress emailAddressByForm = EmailAddress.FromPartsCreate("reo","google.com");
-Console.WriteLine($"E-mail:{emailAddressByForm.Value}");
-Console.WriteLine($"プリンシパル名：{emailAddressByForm.GetPrincipal()}");
-Console.WriteLine($"ドメイン名：{emailAddressByForm.GetDomain()}");
+//EmailAddress emailAddressByForm = EmailAddress.FromPartsCreate("reo","google.com");
+//Console.WriteLine($"E-mail:{emailAddressByForm.Value}");
+//Console.WriteLine($"プリンシパル名：{emailAddressByForm.GetPrincipal()}");
+//Console.WriteLine($"ドメイン名：{emailAddressByForm.GetDomain()}");
 
 // Emailアドレスのバリューオブジェクト参考
 // https://github.com/draphyz/DDD/blob/entityframework/Src/DDD.Common/Domain/EmailAddress.cs

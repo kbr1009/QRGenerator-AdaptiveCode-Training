@@ -14,11 +14,11 @@ namespace Domain.Models.Users
         public EmailAddress EmailAddress { get; }
         public Gender Gender { get; }
         public bool IsDeleted { get; private set; } = false;
-        public FirstName FirstName
+        public string FirstName
         {
             get => UserName.FirstName;
         }
-        public LastName LastName
+        public string LastName
         {
             get => UserName.LastName;
         }
@@ -39,14 +39,13 @@ namespace Domain.Models.Users
 
 
         public static User CreateNewUser(
-            FirstName firstName,
-            LastName lastName,
+            UserName userName,
             EmailAddress emailAddress,
             Gender gender)
         {
             return new User(
                 UserId.Generate(),
-                new UserName(firstName, lastName),
+                userName,
                 emailAddress,
                 gender, false);
         }
@@ -57,12 +56,14 @@ namespace Domain.Models.Users
                 throw new ArgumentNullException("ユーザ名は必須入力項目です。");
         }
 
-        public void ChangeUserName(FirstName firstName, LastName lastName)
+        public void ChangeUserName(string firstName, string lastName)
         {
             if(firstName is null)
-                throw new ArgumentNullException($"必須入力項目です。{typeof(FirstName)}");
+                throw new ArgumentNullException($"名前は必須入力項目です。");
+
             if(lastName is null) 
-                throw new ArgumentNullException($"必須入力項目です。{typeof(LastName)}");
+                throw new ArgumentNullException($"苗字は必須入力項目です。");
+
             this.UserName = new UserName(firstName, lastName);
         }
 

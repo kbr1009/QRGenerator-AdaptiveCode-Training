@@ -28,18 +28,24 @@ namespace Application.Users.Commands
             try
             {
                 User user = User.CreateNewUser(
-                    firstName: new FirstName(createUserModel.FirstName),
-                    lastName: new LastName(createUserModel.LastName),
+                    userName: new UserName(createUserModel.FirstName, createUserModel.LastName),
                     emailAddress: new EmailAddress(createUserModel.EmailAddress),
                     gender: (Gender)createUserModel.Gender);
 
+                UserService userService = new UserService(_repository);
+                if (userService.IsDupulicatedUser(user))
+                {
+                    throw new ArgumentException($"入力されたメールアドレスはすでに登録されています。");
+                }
+
                 QRCode qRCode = QRCode.CreateQRCodeData(user);
+
                 _qRCodeCreatecommand.Execute(qRCode);
                 _repository.Save(user);
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                Console.WriteLine(ex);
             }
         }
     }

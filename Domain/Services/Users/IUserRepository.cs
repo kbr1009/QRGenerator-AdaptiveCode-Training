@@ -10,5 +10,6 @@ namespace Domain.Services.Users
     public interface IUserRepository
     {
         void Save(User user);
+        User Find(EmailAddress emailAddress);
     }
 }
