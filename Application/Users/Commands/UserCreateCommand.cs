@@ -18,24 +18,21 @@ namespace Application.Users.Commands
         public UserCreateCommand(
             IUserRepository userRepository, 
             IQRCodeCreateCommand qRCodeCreateCommand)
-        { 
+        {
             _repository = userRepository;
             _qRCodeCreatecommand = qRCodeCreateCommand;
         }  
 
         public void Execute(CreateUserModel createUserModel)
         {
-            // 例外処理はここでする
             try
             {
-                // ユーザ
                 User user = User.CreateNewUser(
                     firstName: new FirstName(createUserModel.FirstName),
                     lastName: new LastName(createUserModel.LastName),
                     emailAddress: new EmailAddress(createUserModel.EmailAddress),
                     gender: (Gender)createUserModel.Gender);
 
-                // ユーザ作成時のQRコード生成
                 QRCode qRCode = QRCode.CreateQRCodeData(user);
                 _qRCodeCreatecommand.Execute(qRCode);
                 _repository.Save(user);

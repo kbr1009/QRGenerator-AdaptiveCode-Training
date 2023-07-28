@@ -47,3 +47,6 @@ Console.WriteLine($"ドメイン名：{emailAddressByForm.GetDomain()}");
 
 // Emailアドレスのバリューオブジェクト参考
 // https://github.com/draphyz/DDD/blob/entityframework/Src/DDD.Common/Domain/EmailAddress.cs
+
+// 区分をオブジェクトで実装する
+https://qiita.com/haguta/items/ceca207c313eef332cb1

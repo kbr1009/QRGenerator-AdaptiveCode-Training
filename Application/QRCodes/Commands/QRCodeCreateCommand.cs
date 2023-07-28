@@ -13,8 +13,7 @@ namespace Application.QRCodes.Commands
         private readonly IQRGenerate _qRGenerate;
         public QRCodeCreateCommand(IQRGenerate qRGenerate)
         {
-            _qRGenerate = qRGenerate ?? 
-                throw new ArgumentNullException("error!: QRコードのインターフェースが設定されていない");
+            _qRGenerate = qRGenerate;
         }
 
         public void Execute(QRCode qRCode)
