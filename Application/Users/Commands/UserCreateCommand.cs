@@ -14,7 +14,9 @@ namespace Application.Users.Commands
     public class UserCreateCommand : IUserCreateCommand
     {
         private readonly IUserRepository _repository;
+
         private readonly IQRCodeCreateCommand _qRCodeCreatecommand;
+
         public UserCreateCommand(
             IUserRepository userRepository, 
             IQRCodeCreateCommand qRCodeCreateCommand)
